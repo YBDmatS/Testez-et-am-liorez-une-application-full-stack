@@ -2,12 +2,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { RouterTestingModule, } from '@angular/router/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { expect } from '@jest/globals';
 import { SessionService } from '../../../../core/service/session.service';
 
 import { DetailComponent } from './detail.component';
-
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -17,23 +16,17 @@ describe('DetailComponent', () => {
   const mockSessionService = {
     sessionInformation: {
       admin: true,
-      id: 1
-    }
-  }
+      id: 1,
+    },
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        HttpClientModule,
-        MatSnackBarModule,
-        ReactiveFormsModule
-      ],
+      imports: [RouterTestingModule, HttpClientModule, MatSnackBarModule, ReactiveFormsModule],
       declarations: [DetailComponent],
       providers: [{ provide: SessionService, useValue: mockSessionService }],
-    })
-      .compileComponents();
-      service = TestBed.inject(SessionService);
+    }).compileComponents();
+    service = TestBed.inject(SessionService);
     fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -43,4 +36,3 @@ describe('DetailComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Teacher } from '../models/teacher.interface';
 
@@ -7,9 +7,9 @@ import { Teacher } from '../models/teacher.interface';
   providedIn: 'root',
 })
 export class TeacherService {
-  private pathService = 'api/teacher';
+  private httpClient = inject(HttpClient);
 
-  constructor(private httpClient: HttpClient) {}
+  private pathService = 'api/teacher';
 
   public all(): Observable<Teacher[]> {
     return this.httpClient.get<Teacher[]>(this.pathService);

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Session } from '../models/session.interface';
 
@@ -7,9 +7,9 @@ import { Session } from '../models/session.interface';
   providedIn: 'root',
 })
 export class SessionApiService {
-  private pathService = 'api/session';
+  private httpClient = inject(HttpClient);
 
-  constructor(private httpClient: HttpClient) {}
+  private pathService = 'api/session';
 
   public all(): Observable<Session[]> {
     return this.httpClient.get<Session[]>(this.pathService);

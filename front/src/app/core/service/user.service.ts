@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.interface';
 
@@ -7,9 +7,9 @@ import { User } from '../models/user.interface';
   providedIn: 'root',
 })
 export class UserService {
-  private pathService = 'api/user';
+  private httpClient = inject(HttpClient);
 
-  constructor(private httpClient: HttpClient) {}
+  private pathService = 'api/user';
 
   public getById(id: string): Observable<User> {
     return this.httpClient.get<User>(`${this.pathService}/${id}`);

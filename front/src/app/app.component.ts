@@ -13,9 +13,9 @@ import { MaterialModule } from './shared/material.module';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  private authService = inject(AuthService);
-  private router = inject(Router);
-  private sessionService = inject(SessionService);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly sessionService = inject(SessionService);
 
   public $isLogged(): Observable<boolean> {
     return this.sessionService.$isLogged();

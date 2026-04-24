@@ -1,7 +1,7 @@
 export interface Teacher {
-  id: number;
-  lastName: string;
-  firstName: string;
-  createdAt: Date;
-  updatedAt: Date;
+  readonly id: number;
+  readonly lastName: string;
+  readonly firstName: string;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
 }

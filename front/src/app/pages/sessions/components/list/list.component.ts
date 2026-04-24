@@ -15,10 +15,10 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  private sessionApiService = inject(SessionApiService);
-  private sessionService = inject(SessionService);
+  private readonly sessionApiService = inject(SessionApiService);
+  private readonly sessionService = inject(SessionService);
 
-  public sessions$: Observable<Session[]> = this.sessionApiService.all();
+  public readonly sessions$: Observable<Session[]> = this.sessionApiService.all();
 
   get user(): SessionInformation | undefined {
     return this.sessionService.sessionInformation;

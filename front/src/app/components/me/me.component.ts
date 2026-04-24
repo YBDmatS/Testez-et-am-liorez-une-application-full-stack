@@ -14,10 +14,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./me.component.scss'],
 })
 export class MeComponent implements OnInit {
-  private router = inject(Router);
-  private sessionService = inject(SessionService);
-  private matSnackBar = inject(MatSnackBar);
-  private userService = inject(UserService);
+  private readonly router = inject(Router);
+  private readonly sessionService = inject(SessionService);
+  private readonly matSnackBar = inject(MatSnackBar);
+  private readonly userService = inject(UserService);
   public user: User | undefined;
 
   ngOnInit(): void {

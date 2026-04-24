@@ -20,17 +20,17 @@ export class DetailComponent implements OnInit {
   public session: Session | undefined;
   public teacher: Teacher | undefined;
   public isParticipate = false;
-  public isAdmin = false;
-  public sessionId: string;
-  public userId: string;
+  public readonly isAdmin: boolean;
+  public readonly sessionId: string;
+  public readonly userId: string;
 
-  private route = inject(ActivatedRoute);
-  private fb = inject(FormBuilder);
-  private sessionService = inject(SessionService);
-  private sessionApiService = inject(SessionApiService);
-  private teacherService = inject(TeacherService);
-  private matSnackBar = inject(MatSnackBar);
-  private router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly fb = inject(FormBuilder);
+  private readonly sessionService = inject(SessionService);
+  private readonly sessionApiService = inject(SessionApiService);
+  private readonly teacherService = inject(TeacherService);
+  private readonly matSnackBar = inject(MatSnackBar);
+  private readonly router = inject(Router);
 
   constructor() {
     this.sessionId = this.route.snapshot.paramMap.get('id')!;

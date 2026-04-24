@@ -4,8 +4,8 @@ import { SessionService } from '../core/service/session.service';
 
 @Injectable({ providedIn: 'root' })
 export class UnauthGuard implements CanActivate {
-  private router = inject(Router);
-  private sessionService = inject(SessionService);
+  private readonly router = inject(Router);
+  private readonly sessionService = inject(SessionService);
 
 
   public canActivate(): boolean {

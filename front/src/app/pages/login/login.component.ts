@@ -15,15 +15,15 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  private authService = inject(AuthService);
-  private fb = inject(FormBuilder);
-  private router = inject(Router);
-  private sessionService = inject(SessionService);
+  private readonly authService = inject(AuthService);
+  private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
+  private readonly sessionService = inject(SessionService);
 
   public hide = true;
   public onError = false;
 
-  public form = this.fb.group({
+  public readonly form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.min(3)]],
   });

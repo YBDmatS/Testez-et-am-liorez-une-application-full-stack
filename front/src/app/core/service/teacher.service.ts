@@ -7,9 +7,9 @@ import { Teacher } from '../models/teacher.interface';
   providedIn: 'root',
 })
 export class TeacherService {
-  private httpClient = inject(HttpClient);
+  private readonly httpClient = inject(HttpClient);
 
-  private pathService = 'api/teacher';
+  private readonly pathService = 'api/teacher';
 
   public all(): Observable<Teacher[]> {
     return this.httpClient.get<Teacher[]>(this.pathService);

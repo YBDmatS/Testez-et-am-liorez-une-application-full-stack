@@ -1,14 +1,20 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subject, map, startWith, switchMap } from 'rxjs';
+import { Session } from '../../../../core/models/session.interface';
 import { Teacher } from '../../../../core/models/teacher.interface';
 import { SessionService } from '../../../../core/service/session.service';
 import { TeacherService } from '../../../../core/service/teacher.service';
-import { Session } from '../../../../core/models/session.interface';
 import { SessionApiService } from '../../../../core/service/session-api.service';
 import { MaterialModule } from '../../../../shared/material.module';
 import { CommonModule } from '@angular/common';
+
+interface SessionDetail {
+  session: Session;
+  teacher: Teacher;
+  isParticipate: boolean;
+}
 
 @Component({
   selector: 'app-detail',
@@ -16,21 +22,35 @@ import { CommonModule } from '@angular/common';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent implements OnInit {
-  public session: Session | undefined;
-  public teacher: Teacher | undefined;
-  public isParticipate = false;
+export class DetailComponent {
   public readonly isAdmin: boolean;
   public readonly sessionId: string;
   public readonly userId: string;
 
   private readonly route = inject(ActivatedRoute);
-  private readonly fb = inject(FormBuilder);
   private readonly sessionService = inject(SessionService);
   private readonly sessionApiService = inject(SessionApiService);
   private readonly teacherService = inject(TeacherService);
   private readonly matSnackBar = inject(MatSnackBar);
   private readonly router = inject(Router);
+
+  private readonly refresh$ = new Subject<void>();
+
+  public readonly sessionDetail$: Observable<SessionDetail> = this.refresh$.pipe(
+    startWith(undefined),
+    switchMap(() => this.sessionApiService.detail(this.sessionId)),
+    switchMap(session =>
+      this.teacherService.detail(session.teacher_id.toString()).pipe(
+        map(teacher => ({
+          session,
+          teacher,
+          isParticipate: session.users.includes(
+            this.sessionService.sessionInformation!.id
+          ),
+        }))
+      )
+    )
+  );
 
   constructor() {
     this.sessionId = this.route.snapshot.paramMap.get('id')!;
@@ -38,11 +58,7 @@ export class DetailComponent implements OnInit {
     this.userId = this.sessionService.sessionInformation!.id.toString();
   }
 
-  ngOnInit(): void {
-    this.fetchSession();
-  }
-
-  public back() {
+  public back(): void {
     window.history.back();
   }
 
@@ -56,24 +72,12 @@ export class DetailComponent implements OnInit {
   public participate(): void {
     this.sessionApiService
       .participate(this.sessionId, this.userId)
-      .subscribe(() => this.fetchSession());
+      .subscribe(() => this.refresh$.next());
   }
 
   public unParticipate(): void {
     this.sessionApiService
       .unParticipate(this.sessionId, this.userId)
-      .subscribe(() => this.fetchSession());
-  }
-
-  private fetchSession(): void {
-    this.sessionApiService.detail(this.sessionId).subscribe((session: Session) => {
-      this.session = session;
-      this.isParticipate = session.users.some(
-        (u) => u === this.sessionService.sessionInformation!.id,
-      );
-      this.teacherService
-        .detail(session.teacher_id.toString())
-        .subscribe((teacher: Teacher) => (this.teacher = teacher));
-    });
+      .subscribe(() => this.refresh$.next());
   }
 }

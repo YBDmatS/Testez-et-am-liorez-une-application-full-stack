@@ -1,7 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { User } from '../../core/models/user.interface';
 import { SessionService } from '../../core/service/session.service';
 import { UserService } from '../../core/service/user.service';
 import { MaterialModule } from '../../shared/material.module';
@@ -13,18 +12,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './me.component.html',
   styleUrls: ['./me.component.scss'],
 })
-export class MeComponent implements OnInit {
+export class MeComponent {
   private readonly router = inject(Router);
   private readonly sessionService = inject(SessionService);
   private readonly matSnackBar = inject(MatSnackBar);
   private readonly userService = inject(UserService);
-  public user: User | undefined;
 
-  ngOnInit(): void {
-    this.userService
-      .getById(this.sessionService.sessionInformation!.id.toString())
-      .subscribe((user: User) => (this.user = user));
-  }
+  public readonly user$ = this.userService.getById(
+    this.sessionService.sessionInformation!.id.toString()
+  );
 
   public back(): void {
     window.history.back();

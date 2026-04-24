@@ -1,10 +1,10 @@
 export interface Session {
-  id?: number;
-  name: string;
-  description: string;
-  date: Date;
-  teacher_id: number;
-  users: number[];
-  createdAt?: Date;
-  updatedAt?: Date;
+  readonly id?: number;
+  readonly name: string;
+  readonly description: string;
+  readonly date: Date;
+  readonly teacher_id: number;
+  readonly users: number[];
+  readonly createdAt?: Date;
+  readonly updatedAt?: Date;
 }

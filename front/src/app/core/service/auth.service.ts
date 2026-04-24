@@ -9,9 +9,9 @@ import { SessionInformation } from 'src/app/core/models/sessionInformation.inter
   providedIn: 'root',
 })
 export class AuthService {
-  private httpClient = inject(HttpClient);
+  private readonly httpClient = inject(HttpClient);
 
-  private pathService = '/api/auth';
+  private readonly pathService = '/api/auth';
 
   public register(registerRequest: RegisterRequest): Observable<void> {
     return this.httpClient.post<void>(`${this.pathService}/register`, registerRequest);

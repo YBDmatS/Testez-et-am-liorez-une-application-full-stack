@@ -1,9 +1,9 @@
 export interface SessionInformation {
-  token: string;
-  type: string;
-  id: number;
-  username: string;
-  firstName: string;
-  lastName: string;
-  admin: boolean;
+  readonly token: string;
+  readonly type: string;
+  readonly id: number;
+  readonly username: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly admin: boolean;
 }

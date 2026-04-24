@@ -1,6 +1,6 @@
 export interface RegisterRequest {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
+  readonly email: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly password: string;
 }

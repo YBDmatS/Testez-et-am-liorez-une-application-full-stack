@@ -7,9 +7,9 @@ import { User } from '../models/user.interface';
   providedIn: 'root',
 })
 export class UserService {
-  private httpClient = inject(HttpClient);
+  private readonly httpClient = inject(HttpClient);
 
-  private pathService = 'api/user';
+  private readonly pathService = 'api/user';
 
   public getById(id: string): Observable<User> {
     return this.httpClient.get<User>(`${this.pathService}/${id}`);

@@ -7,9 +7,9 @@ import { Session } from '../models/session.interface';
   providedIn: 'root',
 })
 export class SessionApiService {
-  private httpClient = inject(HttpClient);
+  private readonly httpClient = inject(HttpClient);
 
-  private pathService = 'api/session';
+  private readonly pathService = 'api/session';
 
   public all(): Observable<Session[]> {
     return this.httpClient.get<Session[]>(this.pathService);

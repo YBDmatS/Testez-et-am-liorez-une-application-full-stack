@@ -1,10 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SessionService } from '../../core/service/session.service';
 import { UserService } from '../../core/service/user.service';
 import { MaterialModule } from '../../shared/material.module';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-me',
@@ -19,20 +19,18 @@ export class MeComponent {
   private readonly userService = inject(UserService);
 
   public readonly user$ = this.userService.getById(
-    this.sessionService.sessionInformation!.id.toString()
+    this.sessionService.sessionInformation!.id.toString(),
   );
 
   public back(): void {
-    window.history.back();
+    globalThis.history.back();
   }
 
   public delete(): void {
-    this.userService
-      .delete(this.sessionService.sessionInformation!.id.toString())
-      .subscribe(() => {
-        this.matSnackBar.open('Your account has been deleted !', 'Close', { duration: 3000 });
-        this.sessionService.logOut();
-        this.router.navigate(['/']);
-      });
+    this.userService.delete(this.sessionService.sessionInformation!.id.toString()).subscribe(() => {
+      this.matSnackBar.open('Your account has been deleted !', 'Close', { duration: 3000 });
+      this.sessionService.logOut();
+      this.router.navigate(['/']);
+    });
   }
 }

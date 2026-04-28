@@ -1,13 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SessionService } from '../../../../core/service/session.service';
-import { TeacherService } from '../../../../core/service/teacher.service';
 import { Session } from '../../../../core/models/session.interface';
 import { SessionApiService } from '../../../../core/service/session-api.service';
+import { SessionService } from '../../../../core/service/session.service';
+import { TeacherService } from '../../../../core/service/teacher.service';
 import { MaterialModule } from '../../../../shared/material.module';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -48,14 +48,12 @@ export class FormComponent implements OnInit {
   public submit(): void {
     const session = this.sessionForm?.value as Session;
 
-    if (!this.onUpdate) {
-      this.sessionApiService
-        .create(session)
-        .subscribe(() => this.exitPage('Session created !'));
-    } else {
+    if (this.onUpdate) {
       this.sessionApiService
         .update(this.id!, session)
         .subscribe(() => this.exitPage('Session updated !'));
+    } else {
+      this.sessionApiService.create(session).subscribe(() => this.exitPage('Session created !'));
     }
   }
 

@@ -3,9 +3,9 @@
     <span>Yoga app</span>
     @if ($isLogged() | async) {
       <div>
-        <span routerLink="sessions" class="link">Sessions</span>
-        <span routerLink="me" class="link">Account</span>
-        <span (click)="logout()" class="link">Logout</span>
+        <a routerLink="sessions" class="link">Sessions</a>
+        <a routerLink="me" class="link">Account</a>
+        <button (click)="logout()" class="link">Logout</button>
       </div>
     } @else {
       <div>

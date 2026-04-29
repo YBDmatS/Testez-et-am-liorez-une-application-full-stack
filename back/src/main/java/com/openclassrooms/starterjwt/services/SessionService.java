@@ -1,6 +1,7 @@
 package com.openclassrooms.starterjwt.services;
 
-import com.openclassrooms.starterjwt.exception.BadRequestException;
+import com.openclassrooms.starterjwt.exception.AlreadyParticipatingException;
+import com.openclassrooms.starterjwt.exception.NotParticipatingException;
 import com.openclassrooms.starterjwt.exception.ResourceNotFoundException;
 import com.openclassrooms.starterjwt.models.Session;
 import com.openclassrooms.starterjwt.models.User;
@@ -48,7 +49,7 @@ public class SessionService {
 
         boolean alreadyParticipate = session.getUsers().stream().anyMatch(o -> o.getId().equals(userId));
         if (alreadyParticipate) {
-            throw new BadRequestException();
+            throw new AlreadyParticipatingException();
         }
 
         session.getUsers().add(user);
@@ -64,7 +65,7 @@ public class SessionService {
 
         boolean alreadyParticipate = session.getUsers().stream().anyMatch(o -> o.getId().equals(userId));
         if (!alreadyParticipate) {
-            throw new BadRequestException();
+            throw new NotParticipatingException();
         }
 
         session.setUsers(session.getUsers().stream().filter(user -> !user.getId().equals(userId)).collect(Collectors.toList()));

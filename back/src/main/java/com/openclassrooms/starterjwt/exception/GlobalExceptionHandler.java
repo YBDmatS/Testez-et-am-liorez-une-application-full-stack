@@ -23,14 +23,26 @@ public class GlobalExceptionHandler {
         ));
     }
 
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ApiErrorResponse> handleBadRequestException(HttpServletRequest request) {
+    @ExceptionHandler(AlreadyParticipatingException.class)
+    public ResponseEntity<ApiErrorResponse> handleAlreadyParticipatingException(HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         return ResponseEntity.status(status).body(new ApiErrorResponse(
                 LocalDateTime.now(),
                 status.value(),
                 status.name(),
-                "Bad request",
+                "User is already participating in this session",
+                request.getRequestURI()
+        ));
+    }
+
+    @ExceptionHandler(NotParticipatingException.class)
+    public ResponseEntity<ApiErrorResponse> handleNotParticipatingException(HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseEntity.status(status).body(new ApiErrorResponse(
+                LocalDateTime.now(),
+                status.value(),
+                status.name(),
+                "User is not participating in this session",
                 request.getRequestURI()
         ));
     }

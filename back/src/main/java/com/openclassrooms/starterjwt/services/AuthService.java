@@ -28,4 +28,10 @@ public class AuthService {
         userRepository.save(user);
         return true;
     }
+
+    public boolean isAdmin(String email) {
+        return userRepository.findByEmail(email)
+                .map(User::isAdmin)
+                .orElse(false);
+    }
 }

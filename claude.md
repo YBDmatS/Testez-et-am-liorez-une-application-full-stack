@@ -48,6 +48,8 @@ Full-stack yoga studio booking application.
 - Use DTOs for request/response payloads; do not expose entities directly
 - Follow SOLID principles
 - No business logic in controllers
+- Use `@RequiredArgsConstructor` (Lombok) for constructor injection — never write manual constructors for dependency injection
+- Never use `@Autowired` — Spring resolves single-constructor injection automatically via `@RequiredArgsConstructor`
 
 ## Front-end conventions (Angular)
 

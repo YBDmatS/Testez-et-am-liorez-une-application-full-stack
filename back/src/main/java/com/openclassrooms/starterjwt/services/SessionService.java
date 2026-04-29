@@ -1,7 +1,7 @@
 package com.openclassrooms.starterjwt.services;
 
 import com.openclassrooms.starterjwt.exception.BadRequestException;
-import com.openclassrooms.starterjwt.exception.NotFoundException;
+import com.openclassrooms.starterjwt.exception.ResourceNotFoundException;
 import com.openclassrooms.starterjwt.models.Session;
 import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.SessionRepository;
@@ -43,7 +43,7 @@ public class SessionService {
         Session session = this.sessionRepository.findById(id).orElse(null);
         User user = this.userRepository.findById(userId).orElse(null);
         if (session == null || user == null) {
-            throw new NotFoundException();
+            throw new ResourceNotFoundException();
         }
 
         boolean alreadyParticipate = session.getUsers().stream().anyMatch(o -> o.getId().equals(userId));
@@ -59,7 +59,7 @@ public class SessionService {
     public void noLongerParticipate(Long id, Long userId) {
         Session session = this.sessionRepository.findById(id).orElse(null);
         if (session == null) {
-            throw new NotFoundException();
+            throw new ResourceNotFoundException();
         }
 
         boolean alreadyParticipate = session.getUsers().stream().anyMatch(o -> o.getId().equals(userId));

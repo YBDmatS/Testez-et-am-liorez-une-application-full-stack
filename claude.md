@@ -18,6 +18,26 @@ Full-stack yoga studio booking application.
 
 ---
 
+## Workflow obligatoire entre les étapes d'une todo list
+
+Chaque fois qu'on travaille sur une todo list définie, après avoir complété
+une étape tu dois obligatoirement :
+
+1. Annoncer clairement "✅ Étape X terminée — en attente de ta validation"
+2. Lister un résumé des fichiers modifiés
+3. Ne toucher à AUCUN fichier supplémentaire
+4. Attendre que l'utilisateur :
+   - Lance le build manuellement
+   - Lance les tests manuellement
+   - Commite les changements
+   - Tape "go" ou "next" pour autoriser le passage à l'étape suivante
+
+Tu ne passes JAMAIS à l'étape suivante de ta propre initiative, même si
+tu estimes que tout est prêt. "go" ou "next" sont les seuls déclencheurs
+autorisés pour continuer.
+
+---
+
 ## Git – Branches
 
 - Base branch: `develop`

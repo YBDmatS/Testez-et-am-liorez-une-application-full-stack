@@ -1,5 +1,6 @@
 package com.openclassrooms.starterjwt.controllers;
 
+import com.openclassrooms.starterjwt.dto.UserDto;
 import com.openclassrooms.starterjwt.mapper.UserMapper;
 import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.services.UserService;
@@ -20,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") String id) {
+    public ResponseEntity<UserDto> findById(@PathVariable("id") String id) {
         try {
             User user = this.userService.findById(Long.valueOf(id));
 
@@ -36,7 +37,7 @@ public class UserController {
 
     @DeleteMapping("{id}")
     @PreAuthorize("@userSecurity.isOwner(#id, authentication.name)")
-    public ResponseEntity<?> save(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> save(@PathVariable("id") Long id) {
         User user = this.userService.findById(id);
 
         if (user == null) {

@@ -44,12 +44,13 @@ public class AuthService {
             return false;
         }
 
-        User user = new User(
-                signUpRequest.getEmail(),
-                signUpRequest.getLastName(),
-                signUpRequest.getFirstName(),
-                passwordEncoder.encode(signUpRequest.getPassword()),
-                false);
+        User user = User.builder()
+                .email(signUpRequest.getEmail())
+                .lastName(signUpRequest.getLastName())
+                .firstName(signUpRequest.getFirstName())
+                .password(passwordEncoder.encode(signUpRequest.getPassword()))
+                .admin(false)
+                .build();
 
         userRepository.save(user);
         return true;

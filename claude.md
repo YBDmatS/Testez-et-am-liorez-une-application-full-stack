@@ -10,6 +10,7 @@ Full-stack yoga studio booking application.
 ## General rules
 
 - Do the **minimum necessary** to fulfil the task. Do not refactor, add, or change anything beyond what is explicitly asked.
+- When rewriting a file entirely (via Write tool), reproduce the existing lines **exactly** — do not simplify, reformat, or clean up lines that are not part of the requested change.
 - All code and comments must be written in **English**.
 - Respect **clean architecture** at all times:
   - Back-end: controller → service → repository. No direct repository calls from controllers. Business logic belongs in services.

@@ -1,6 +1,5 @@
 package com.openclassrooms.starterjwt.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,7 +29,7 @@ public class SessionDto {
     @JsonProperty("teacher_id")
     private Long teacherId;
 
-    @NotNull
+    @NotBlank
     @Size(max = 2500)
     private String description;
 

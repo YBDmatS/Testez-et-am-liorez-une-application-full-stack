@@ -1,5 +1,6 @@
 package com.openclassrooms.starterjwt.services;
 
+import com.openclassrooms.starterjwt.exception.EmailAlreadyTakenException;
 import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.payload.request.LoginRequest;
 import com.openclassrooms.starterjwt.payload.request.SignupRequest;
@@ -39,9 +40,9 @@ public class AuthService {
                 isAdmin(userDetails.getUsername()));
     }
 
-    public boolean register(SignupRequest signUpRequest) {
+    public void register(SignupRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return false;
+            throw new EmailAlreadyTakenException();
         }
 
         User user = User.builder()
@@ -53,7 +54,6 @@ public class AuthService {
                 .build();
 
         userRepository.save(user);
-        return true;
     }
 
     public boolean isAdmin(String email) {

@@ -1,5 +1,6 @@
 package com.openclassrooms.starterjwt.services;
 
+import com.openclassrooms.starterjwt.exception.ResourceNotFoundException;
 import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,6 @@ public class TeacherService {
     }
 
     public Teacher findById(Long id) {
-        return this.teacherRepository.findById(id).orElse(null);
+        return this.teacherRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 }

@@ -1,5 +1,6 @@
 package com.openclassrooms.starterjwt.services;
 
+import com.openclassrooms.starterjwt.exception.ResourceNotFoundException;
 import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,6 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        return this.userRepository.findById(id).orElse(null);
+        return this.userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 }

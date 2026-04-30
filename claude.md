@@ -71,6 +71,7 @@ autorisés pour continuer.
 - No business logic in controllers
 - Use `@RequiredArgsConstructor` (Lombok) for constructor injection — never write manual constructors for dependency injection
 - Never use `@Autowired` — Spring resolves single-constructor injection automatically via `@RequiredArgsConstructor`
+- Keep intermediate variables (e.g. `User user = ...`, `Session session = ...`) for readability — do not inline service calls into `ResponseEntity.ok().body(...)`; exception: bare existence-check calls whose return value is intentionally discarded
 
 ## Front-end conventions (Angular)
 

@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -63,7 +62,7 @@ public class SessionService {
             throw new NotParticipatingException();
         }
 
-        session.setUsers(session.getUsers().stream().filter(user -> !user.getId().equals(userId)).collect(Collectors.toList()));
+        session.setUsers(session.getUsers().stream().filter(user -> !user.getId().equals(userId)).toList());
 
         this.sessionRepository.save(session);
     }

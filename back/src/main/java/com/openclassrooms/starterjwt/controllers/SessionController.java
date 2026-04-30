@@ -52,26 +52,26 @@ public class SessionController {
         return ResponseEntity.ok().body(this.sessionMapper.toDto(session));
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<SessionDto> update(@PathVariable("id") String id, @Valid @RequestBody SessionDto sessionDto) {
         Session session = this.sessionService.update(Long.parseLong(id), this.sessionMapper.toEntity(sessionDto));
 
         return ResponseEntity.ok().body(this.sessionMapper.toDto(session));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> save(@PathVariable("id") String id) {
         this.sessionService.delete(Long.parseLong(id));
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("{id}/participate/{userId}")
+    @PostMapping("/{id}/participate/{userId}")
     public ResponseEntity<Void> participate(@PathVariable("id") String id, @PathVariable("userId") String userId) {
         this.sessionService.participate(Long.parseLong(id), Long.parseLong(userId));
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("{id}/participate/{userId}")
+    @DeleteMapping("/{id}/participate/{userId}")
     public ResponseEntity<Void> noLongerParticipate(@PathVariable("id") String id, @PathVariable("userId") String userId) {
         this.sessionService.noLongerParticipate(Long.parseLong(id), Long.parseLong(userId));
         return ResponseEntity.ok().build();

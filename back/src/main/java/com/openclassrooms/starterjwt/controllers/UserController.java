@@ -24,22 +24,13 @@ public class UserController {
     public ResponseEntity<UserDto> findById(@PathVariable("id") String id) {
         User user = this.userService.findById(Long.valueOf(id));
 
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
         return ResponseEntity.ok().body(this.userMapper.toDto(user));
     }
 
     @DeleteMapping("{id}")
     @PreAuthorize("@userSecurity.isOwner(#id, authentication.name)")
     public ResponseEntity<Void> save(@PathVariable("id") Long id) {
-        User user = this.userService.findById(id);
-
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
+        this.userService.findById(id);
         this.userService.delete(id);
         return ResponseEntity.ok().build();
     }

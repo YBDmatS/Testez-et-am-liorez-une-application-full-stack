@@ -60,7 +60,7 @@ public class SessionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> save(@PathVariable("id") String id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") String id) {
         this.sessionService.delete(Long.parseLong(id));
         return ResponseEntity.ok().build();
     }

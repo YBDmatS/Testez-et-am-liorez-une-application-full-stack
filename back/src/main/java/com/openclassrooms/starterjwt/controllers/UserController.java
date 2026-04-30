@@ -29,7 +29,7 @@ public class UserController {
 
     @DeleteMapping("{id}")
     @PreAuthorize("@userSecurity.isOwner(#id, authentication.name)")
-    public ResponseEntity<Void> save(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         this.userService.delete(id);
         return ResponseEntity.ok().build();
     }

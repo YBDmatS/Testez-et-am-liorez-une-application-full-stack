@@ -98,7 +98,7 @@ Dans l'onglet ```Exec```, il faut :
     use test;
     ```
 
-3. Copier le contenu du fichier `ressources/sql/insert_user.sql` et l'exécuter dans l'invite de commande :
+3. Copier le contenu du fichier `ressources/sql/insert.sql` et l'exécuter dans l'invite de commande :
 
     ```
     INSERT INTO users(first_name, last_name, admin, email, password) VALUES ('Admin', 'Admin', true, 'yoga@studio.com', '$2a$10$.Hsa/ZjUVaHqi0tp9xieMeewrnZxrZ5pQRzddUXE/WjDu2ZThe6Iq');

@@ -47,6 +47,18 @@ public class GlobalExceptionHandler {
         ));
     }
 
+    @ExceptionHandler(EmailAlreadyTakenException.class)
+    public ResponseEntity<ApiErrorResponse> handleEmailAlreadyTakenException(HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseEntity.status(status).body(new ApiErrorResponse(
+                LocalDateTime.now(),
+                status.value(),
+                status.name(),
+                "Email is already taken",
+                request.getRequestURI()
+        ));
+    }
+
     @ExceptionHandler(NumberFormatException.class)
     public ResponseEntity<ApiErrorResponse> handleNumberFormatException(HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;

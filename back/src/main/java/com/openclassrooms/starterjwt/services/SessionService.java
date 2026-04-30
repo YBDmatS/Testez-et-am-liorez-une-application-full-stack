@@ -24,6 +24,7 @@ public class SessionService {
     }
 
     public void delete(Long id) {
+        getById(id);
         this.sessionRepository.deleteById(id);
     }
 

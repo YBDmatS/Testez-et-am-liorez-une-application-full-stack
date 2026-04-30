@@ -12,6 +12,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public void delete(Long id) {
+        findById(id);
         this.userRepository.deleteById(id);
     }
 

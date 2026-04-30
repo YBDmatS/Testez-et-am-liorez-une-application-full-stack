@@ -13,7 +13,7 @@ public class JwtResponse {
     private String firstName;
     private String lastName;
 
-    private Boolean admin;
+    private boolean admin;
 
     public JwtResponse(String accessToken, Long id, String username, String firstName, String lastName, Boolean admin) {
         this.token = accessToken;

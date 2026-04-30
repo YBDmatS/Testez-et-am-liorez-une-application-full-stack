@@ -32,10 +32,6 @@ public class SessionController {
     public ResponseEntity<SessionDto> findById(@PathVariable("id") String id) {
         Session session = this.sessionService.getById(Long.valueOf(id));
 
-        if (session == null) {
-            return ResponseEntity.notFound().build();
-        }
-
         return ResponseEntity.ok().body(this.sessionMapper.toDto(session));
     }
 
@@ -65,12 +61,7 @@ public class SessionController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> save(@PathVariable("id") String id) {
-        Session session = this.sessionService.getById(Long.valueOf(id));
-
-        if (session == null) {
-            return ResponseEntity.notFound().build();
-        }
-
+        this.sessionService.getById(Long.valueOf(id));
         this.sessionService.delete(Long.parseLong(id));
         return ResponseEntity.ok().build();
     }
@@ -78,14 +69,12 @@ public class SessionController {
     @PostMapping("{id}/participate/{userId}")
     public ResponseEntity<Void> participate(@PathVariable("id") String id, @PathVariable("userId") String userId) {
         this.sessionService.participate(Long.parseLong(id), Long.parseLong(userId));
-
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("{id}/participate/{userId}")
     public ResponseEntity<Void> noLongerParticipate(@PathVariable("id") String id, @PathVariable("userId") String userId) {
         this.sessionService.noLongerParticipate(Long.parseLong(id), Long.parseLong(userId));
-
         return ResponseEntity.ok().build();
     }
 }

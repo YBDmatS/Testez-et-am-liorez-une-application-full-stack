@@ -62,7 +62,7 @@ public class SessionService {
             throw new NotParticipatingException();
         }
 
-        session.setUsers(session.getUsers().stream().filter(user -> !user.getId().equals(userId)).toList());
+        session.getUsers().removeIf(user -> user.getId().equals(userId));
 
         this.sessionRepository.save(session);
     }

@@ -137,3 +137,15 @@ describe('MeComponent', () => {
     });
   });
 });
+
+describe('MeComponent – additional unit tests', () => {
+  afterEach(() => TestBed.resetTestingModule());
+
+  it('should call globalThis.history.back() on back()', async () => {
+    const { component } = await buildFixture(false);
+    const historySpy = jest.spyOn(globalThis.history, 'back').mockImplementation(() => {});
+    component.back();
+    expect(historySpy).toHaveBeenCalled();
+    historySpy.mockRestore();
+  });
+});

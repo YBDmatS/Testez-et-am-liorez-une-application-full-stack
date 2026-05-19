@@ -42,6 +42,7 @@ const buildFixture = async (
   component: DetailComponent;
   sessionApiMock: { detail: jest.Mock; delete: jest.Mock };
   routerMock: { navigate: jest.Mock };
+  snackBarMock: { open: jest.Mock };
 }> => {
   const sessionApiMock = {
     detail: jest.fn().mockReturnValue(of(mockSession)),
@@ -80,7 +81,7 @@ const buildFixture = async (
   const fixture = TestBed.createComponent(DetailComponent);
   fixture.detectChanges();
 
-  return { fixture, component: fixture.componentInstance, sessionApiMock, routerMock };
+  return { fixture, component: fixture.componentInstance, sessionApiMock, routerMock, snackBarMock };
 };
 
 describe('DetailComponent', () => {
@@ -106,6 +107,18 @@ describe('DetailComponent', () => {
       const { component, sessionApiMock } = await buildFixture(true);
       component.delete();
       expect(sessionApiMock.delete).toHaveBeenCalledWith('1');
+    });
+
+    it('should open snack bar with "Session deleted !" after delete()', async () => {
+      const { component, snackBarMock } = await buildFixture(true);
+      component.delete();
+      expect(snackBarMock.open).toHaveBeenCalledWith('Session deleted !', 'Close', { duration: 3000 });
+    });
+
+    it('should navigate to sessions after delete()', async () => {
+      const { component, routerMock } = await buildFixture(true);
+      component.delete();
+      expect(routerMock.navigate).toHaveBeenCalledWith(['sessions']);
     });
   });
 
@@ -143,6 +156,20 @@ describe('DetailComponent', () => {
       const content = fixture.nativeElement.textContent as string;
       expect(content).not.toContain('Delete');
       expect(content).toContain('Participate');
+    });
+
+    it('should navigate to sessions when Delete button is clicked', async () => {
+      const { fixture, routerMock } = await buildFixture(true);
+      const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]') as HTMLButtonElement;
+      deleteButton.click();
+      expect(routerMock.navigate).toHaveBeenCalledWith(['sessions']);
+    });
+
+    it('should open snack bar with "Session deleted !" when Delete button is clicked', async () => {
+      const { fixture, snackBarMock } = await buildFixture(true);
+      const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]') as HTMLButtonElement;
+      deleteButton.click();
+      expect(snackBarMock.open).toHaveBeenCalledWith('Session deleted !', 'Close', { duration: 3000 });
     });
   });
 });

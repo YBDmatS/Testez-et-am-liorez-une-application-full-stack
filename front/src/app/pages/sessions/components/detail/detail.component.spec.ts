@@ -40,7 +40,7 @@ const buildFixture = async (
 ): Promise<{
   fixture: ComponentFixture<DetailComponent>;
   component: DetailComponent;
-  sessionApiMock: { detail: jest.Mock; delete: jest.Mock };
+  sessionApiMock: { detail: jest.Mock; delete: jest.Mock; participate: jest.Mock; unParticipate: jest.Mock };
   routerMock: { navigate: jest.Mock };
   snackBarMock: { open: jest.Mock };
 }> => {
@@ -171,5 +171,29 @@ describe('DetailComponent', () => {
       deleteButton.click();
       expect(snackBarMock.open).toHaveBeenCalledWith('Session deleted !', 'Close', { duration: 3000 });
     });
+  });
+});
+
+describe('DetailComponent – additional unit tests', () => {
+  afterEach(() => TestBed.resetTestingModule());
+
+  it('should call globalThis.history.back() on back()', async () => {
+    const { component } = await buildFixture(true);
+    const historySpy = jest.spyOn(globalThis.history, 'back').mockImplementation(() => {});
+    component.back();
+    expect(historySpy).toHaveBeenCalled();
+    historySpy.mockRestore();
+  });
+
+  it('should call sessionApiService.participate() with sessionId and userId on participate()', async () => {
+    const { component, sessionApiMock } = await buildFixture(false);
+    component.participate();
+    expect(sessionApiMock.participate).toHaveBeenCalledWith('1', '1');
+  });
+
+  it('should call sessionApiService.unParticipate() with sessionId and userId on unParticipate()', async () => {
+    const { component, sessionApiMock } = await buildFixture(false);
+    component.unParticipate();
+    expect(sessionApiMock.unParticipate).toHaveBeenCalledWith('1', '1');
   });
 });

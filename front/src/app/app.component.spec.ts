@@ -67,7 +67,7 @@ describe('AppComponent', () => {
 
     it('should create', async () => {
       const { fixture } = await buildFixture(false);
-      expect(fixture.componentInstance).toBeTruthy();
+      expect(fixture.componentInstance).not.toBeNull();
     });
 
     it('should show Logout button when user is logged in', async () => {

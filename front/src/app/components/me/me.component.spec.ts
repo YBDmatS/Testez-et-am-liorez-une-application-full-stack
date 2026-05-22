@@ -100,7 +100,7 @@ describe('MeComponent', () => {
 
     it('should create', async () => {
       const { fixture } = await buildFixture(false);
-      expect(fixture.componentInstance).toBeTruthy();
+      expect(fixture.componentInstance).not.toBeNull();
     });
 
     it('should display user name and email', async () => {
@@ -120,7 +120,7 @@ describe('MeComponent', () => {
     it('should show Delete button for non-admin and hide it for admin', async () => {
       const { fixture } = await buildFixture(false);
       const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]') as HTMLButtonElement;
-      expect(deleteButton).toBeTruthy();
+      expect(deleteButton).not.toBeNull();
 
       TestBed.resetTestingModule();
       const { fixture: adminFixture } = await buildFixture(true);

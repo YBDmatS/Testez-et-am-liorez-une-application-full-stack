@@ -127,7 +127,7 @@ describe('DetailComponent', () => {
 
     it('should create', async () => {
       const { fixture } = await buildFixture(true);
-      expect(fixture.componentInstance).toBeTruthy();
+      expect(fixture.componentInstance).not.toBeNull();
     });
 
     it('should display session name and description', async () => {
@@ -147,7 +147,7 @@ describe('DetailComponent', () => {
     it('should show Delete button when user is admin', async () => {
       const { fixture } = await buildFixture(true);
       const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]') as HTMLButtonElement;
-      expect(deleteButton).toBeTruthy();
+      expect(deleteButton).not.toBeNull();
       expect(deleteButton.textContent).toContain('Delete');
     });
 

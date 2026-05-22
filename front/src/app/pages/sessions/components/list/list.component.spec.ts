@@ -112,7 +112,7 @@ describe('ListComponent', () => {
 
     it('should create', async () => {
       await createComponent(adminUser);
-      expect(fixture.componentInstance).toBeTruthy();
+      expect(fixture.componentInstance).not.toBeNull();
     });
 
     it('should display one card per session in the list', async () => {
@@ -124,7 +124,7 @@ describe('ListComponent', () => {
     it('should show Create button when user is admin', async () => {
       await createComponent(adminUser);
       const createButton = fixture.nativeElement.querySelector('button[routerLink="create"]');
-      expect(createButton).toBeTruthy();
+      expect(createButton).not.toBeNull();
     });
 
     it('should hide Create button when user is not admin', async () => {

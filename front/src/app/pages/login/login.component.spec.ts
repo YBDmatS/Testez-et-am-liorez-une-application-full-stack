@@ -47,22 +47,22 @@ describe('LoginComponent', () => {
 
     it('should be invalid when email is empty', () => {
       component.form.setValue({ email: '', password: 'test123' });
-      expect(component.form.invalid).toBeTruthy();
+      expect(component.form.invalid).toBe(true);
     });
 
     it('should be invalid when password is empty', () => {
       component.form.setValue({ email: 'test@test.com', password: '' });
-      expect(component.form.invalid).toBeTruthy();
+      expect(component.form.invalid).toBe(true);
     });
 
     it('should be invalid when email format is incorrect', () => {
       component.form.setValue({ email: 'not-an-email', password: 'test123' });
-      expect(component.form.get('email')?.errors?.['email']).toBeTruthy();
+      expect(component.form.get('email')?.errors?.['email']).toBe(true);
     });
 
     it('should be valid when both fields are correctly filled', () => {
       component.form.setValue({ email: 'test@test.com', password: 'test123' });
-      expect(component.form.valid).toBeTruthy();
+      expect(component.form.valid).toBe(true);
     });
 
     it('should call authService.login with form values on submit', () => {
@@ -87,11 +87,11 @@ describe('LoginComponent', () => {
       authServiceMock.login.mockReturnValue(throwError(() => new Error('Unauthorized')));
       component.form.setValue({ email: 'test@test.com', password: 'test123' });
       component.submit();
-      expect(component.onError).toBeTruthy();
+      expect(component.onError).toBe(true);
     });
 
     it('should have hide set to true by default', () => {
-      expect(component.hide).toBeTruthy();
+      expect(component.hide).toBe(true);
     });
   });
 
@@ -122,14 +122,14 @@ describe('LoginComponent', () => {
     });
 
     it('should create', () => {
-      expect(component).toBeTruthy();
+      expect(fixture.componentInstance).not.toBeNull();
     });
 
     it('should disable submit button when form is invalid', () => {
       const button = fixture.nativeElement.querySelector(
         'button[type="submit"]',
       ) as HTMLButtonElement;
-      expect(button.disabled).toBeTruthy();
+      expect(button.disabled).toBe(true);
     });
 
     it('should enable submit button when form is valid', () => {
@@ -138,14 +138,14 @@ describe('LoginComponent', () => {
       const button = fixture.nativeElement.querySelector(
         'button[type="submit"]',
       ) as HTMLButtonElement;
-      expect(button.disabled).toBeFalsy();
+      expect(button.disabled).toBe(false);
     });
 
     it('should display error message when onError is true', () => {
       component.onError = true;
       fixture.detectChanges();
       const errorEl = fixture.nativeElement.querySelector('.error') as HTMLElement;
-      expect(errorEl).toBeTruthy();
+      expect(errorEl).not.toBeNull();
       expect(errorEl.textContent).toContain('An error occurred');
     });
 

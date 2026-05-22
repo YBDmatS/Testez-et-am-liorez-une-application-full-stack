@@ -7,11 +7,11 @@
             <button mat-icon-button (click)="back()">
               <mat-icon>arrow_back</mat-icon>
             </button>
-            <h1>{{ data.session.name | titlecase }}</h1>
+            <h1 data-cy="session-name">{{ data.session.name | titlecase }}</h1>
           </div>
           <div>
             @if (isAdmin) {
-              <button mat-raised-button color="warn" (click)="delete()">
+              <button mat-raised-button color="warn" (click)="delete()" data-cy="delete-button">
                 <mat-icon>delete</mat-icon>
                 <span class="ml1">Delete</span>
               </button>
@@ -22,12 +22,13 @@
                     mat-raised-button
                     color="primary"
                     (click)="participate()"
+                    data-cy="participate-button"
                   >
                     <mat-icon>person_add</mat-icon>
                     <span class="ml1">Participate</span>
                   </button>
                 } @else {
-                  <button mat-raised-button color="warn" (click)="unParticipate()">
+                  <button mat-raised-button color="warn" (click)="unParticipate()" data-cy="unparticipate-button">
                     <mat-icon>person_remove</mat-icon>
                     <span class="ml1">Do not participate</span>
                   </button>
@@ -41,7 +42,7 @@
         <mat-card-subtitle>
           <div fxLayoutAlign="start center" class="ml3">
             <mat-icon> people </mat-icon>
-            <span class="ml1">{{ data.teacher.firstName }} {{ data.teacher.lastName | uppercase }}</span>
+            <span class="ml1" data-cy="teacher-name">{{ data.teacher.firstName }} {{ data.teacher.lastName | uppercase }}</span>
           </div>
         </mat-card-subtitle>
       }
@@ -52,14 +53,14 @@
         <div class="my2" fxLayout="row" fxLayoutAlign="space-between center">
           <div fxLayoutAlign="start center">
             <mat-icon> group </mat-icon>
-            <span class="ml1">{{ data.session.users.length }} attendees</span>
+            <span class="ml1" data-cy="session-attendees">{{ data.session.users.length }} attendees</span>
           </div>
           <div fxLayoutAlign="start center">
             <mat-icon> calendar_month </mat-icon>
-            <span class="ml1">{{ data.session.date | date: 'longDate' }}</span>
+            <span class="ml1" data-cy="session-date">{{ data.session.date | date: 'longDate' }}</span>
           </div>
         </div>
-        <div class="description">
+        <div class="description" data-cy="session-description">
           <p>Description:</p>
           {{ data.session.description }}
           <br />

@@ -27,10 +27,6 @@ describe('SessionApiService', () => {
 
   afterEach(() => httpMock.verify());
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
   it('should send a GET to api/session and return the list of sessions', () => {
     let result: Session[] | undefined;
     service.all().subscribe((res) => (result = res));

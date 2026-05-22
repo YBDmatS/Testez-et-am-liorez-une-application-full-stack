@@ -29,10 +29,6 @@ describe('UserService', () => {
 
   afterEach(() => httpMock.verify());
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
   it('should send a GET to api/user/:id and return the user', () => {
     let result: User | undefined;
     service.getById('1').subscribe((res) => (result = res));

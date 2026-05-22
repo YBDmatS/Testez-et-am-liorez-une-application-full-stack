@@ -42,10 +42,6 @@ describe('AuthService', () => {
 
   afterEach(() => httpMock.verify());
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
   it('should send a POST to /api/auth/register with the register request body', () => {
     service.register(mockRegisterRequest).subscribe();
     const req = httpMock.expectOne('/api/auth/register');

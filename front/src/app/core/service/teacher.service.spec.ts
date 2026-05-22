@@ -23,10 +23,6 @@ describe('TeacherService', () => {
 
   afterEach(() => httpMock.verify());
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
   it('should send a GET to api/teacher and return the list of teachers', () => {
     let result: Teacher[] | undefined;
     service.all().subscribe((res) => (result = res));
